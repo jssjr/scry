@@ -4,8 +4,7 @@ module Scry
 
     def [](k)
       unless self.has_key?(k)
-        nil
-        #raise ConfigKeyNotFound, "Unable to locate config key: #{k}"
+        raise ConfigKeyNotFound, "Unable to locate config key: #{k}, #{self}"
       end
       super(k)
     end
