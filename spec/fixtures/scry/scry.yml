@@ -1,0 +1,5 @@
+---
+project:
+  domain: www.example.com
+  web:
+    hostname: www.example.internal

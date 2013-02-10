@@ -1,0 +1,4 @@
+---
+project:
+  web:
+    hostname: www.example.int
