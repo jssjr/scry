@@ -42,24 +42,31 @@ source "config/scry.yml"
 
 # Configuration requirements and default values
 namespace 'myapp' do
-  param 'domain', :type => String,
+  param 'domain',
+    :type => String,
     :description => "Canonical domain name for the RC service"
 
-  param 'memcached', :default => 'localhost:11211', :type => String, Array,
+  param 'memcached',
+    :default => [ 'localhost:11211' ],
+    :type => Array,
     :description => "List of memcached servers to use"
 
   namespace 'web' do
-    param 'hostname', :type => String,
+    param 'hostname',
+      :type => String,
       :description => "Internal hostname for the RC service"
   end
 
   namespace 'mail' do
-    param 'method', :default => 'sendmail', :type => String,
+    param 'method',
+      :default => 'sendmail',
+      :type => String,
       :description => "What ActionMailer method to use (sendmail|smtp)"
-    param 'sendmail', :default => '/usr/bin/sendmail', :type => String,
+    param 'sendmail',
+      :default => '/usr/bin/sendmail',
+      :type => String,
       :description => "Location of the sendmail binary"
   end
-
 end
 ```
 
@@ -91,7 +98,7 @@ app_domain = cfg['myapp']['domain']
 You can also use accessor methods on the Scry object to find the value of configration data.
 
 ```ruby
-app_domain = Scry.fetch('myapp', 'domain')
+app_domain = Scry.fetch('myapp')
 
 # or...
 
@@ -101,13 +108,10 @@ app_domain = Scry.fetch('myapp').fetch('domain')
 ### Inspecting the results of a Scry
 
 ```ruby
-app_domain = Scry.fetch('myapp', 'domain')
+app_domain = Scry['myapp']['domain']
 
 puts app_domain
 # "www.example.com"
-
-puts app_domain.scry_source
-# "/home/ssanders/.ridecharge/scry.yml"
 ```
 
 or
@@ -117,7 +121,7 @@ rake scry
 
 # and/or
 
-rake scry:yaml
+rake scry:view
 ```
 
 ## Contributing
